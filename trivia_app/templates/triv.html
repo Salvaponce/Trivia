@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Trivial{% endblock %} {% block content %}
+<p style="margin-left: 10px;">{{n}}/10</p>
+{% if m %}
+<p style="text-align: center">{{m|first}}</p>
+{% endif %}
+<h3 style="text-align: center; margin-bottom: 1rem;">{{p}}</h3>
+
+<form
+    style="text-align: center"
+    action="{% url 'trivial:preguntas' n|add:1 %}"
+    method="post"
+  >{% csrf_token %} 
+  <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
+    <ul style="list-style-type: none">
+      {% for res in r %}
+      <li>
+        <input
+          type="radio"
+          class="btn-check"
+          name="respuesta"
+          autocomplete="off"
+          id="{{res}}"
+          value="{{res}}"
+        /><label class="btn btn-outline-primary" for="{{res}}">{{res}}</label>
+      </li>
+      {% endfor %}
+    </ul>
+    <input type="submit" name="next" class="btn btn-dark" value="Next!" />
+  </form>
+</div>
+{% endblock %}

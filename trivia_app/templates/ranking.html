@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Ranking {% endblock %} {% block content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User</th>
+      <th scope="col">Punctuation</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u,n in lista%}
+    <tr>
+      <th scope="row">{{n}}</th>
+      <td>{{u.user}}</td>
+      <td>{{u.point}}</td>
+      <td>Tempo</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
