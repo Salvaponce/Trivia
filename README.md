@@ -1,3 +1,3 @@
 # Trivia
 
-A trivia game with conection to an API to get questions.
+A trivia game with connection to an API to get questions.
