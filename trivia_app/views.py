@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from trivia_app.models import Pregunta, Respuestas, Score
 import random
 from trivia_app.form import login_form
@@ -10,7 +10,7 @@ import ssl, json, html, time
 
 # Create your views here.
 
-def home(request):
+def home(request, user = False):
     if request.session.get('score'):
         del request.session['score']
     if request.session.get('ls'):
@@ -22,7 +22,9 @@ def home(request):
     context = ssl._create_unverified_context()
     res = urlopen('https://opentdb.com/api_category.php', context=context) 
     data = json.loads(res.read()) 
-
+    
+    if user:
+        return render(request, 'home.html', {'categorias': data['trivia_categories'], 'user': user})
     return render(request, 'home.html', {'categorias': data['trivia_categories']})
 
 
@@ -36,7 +38,6 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            print('ok')
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -56,7 +57,8 @@ def login_view(request):
             user = authenticate(username=request.POST['username'], password = request.POST['password'])            
             if user is not None:
                 login(request, user)
-                return render(request, 'home.html', {'user': user})
+                return home(request, user)
+                #return render(request, 'home.html', {'user': user})
     else:
         form = login_form()
     return render(request, 'login.html', {'form': form})
@@ -64,7 +66,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'home.html')
+    return home(request)
 
 
 def preguntas(request, numero = 0):     

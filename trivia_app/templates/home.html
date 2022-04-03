@@ -1,11 +1,11 @@
-{% extends "base.html" %} {% block title %}Trivial{% endblock %} {%block content%}
+{% extends "base.html" %} {% block title %}Trivial{% endblock %} {% load static %} {%block content%}
 
 <h2 style="padding: 10px; text-align: center">Welcome to our trivia</h2>
 
 <p style="text-align: center">Choose a category</p>
 
 
-  <form action="1/" method="post" style="text-align: center"
+  <form action="/trivial/1/" method="post" style="text-align: center"
     > {% csrf_token %}    
       <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <div class="container">
@@ -20,14 +20,14 @@
             autocomplete="off"
             value="{{c.id}}"
           />
-          <label class="btn btn-outline-primary" for="{{c}}">{{c.name}}</label>
+          <label class="btn btn-outline-dark" for="{{c}}">{{c.name}}</label>
         </div>
           {% endfor %}
         </div>
         </div>
       </div>
         <div style="padding: 20px;">
-          <input type="submit" name="start" class="btn btn-primary" value="Start!"/>
+          <input type="submit" name="start" class="btn btn-success" value="Start!"/>
         </div>
   </form>
   <p style="text-align: center; color: red;">If you do not get the categories try to hit the button home.</p>
