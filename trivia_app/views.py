@@ -8,9 +8,9 @@ from trivia_app.form import login_form
 from urllib.request import urlopen
 import ssl, json, html, time
 
-# Create your views here.
 
 def home(request, user = False):
+    # Elimino alguna de estas variables si ya fueron creadas para empezar desde 0 el trivial
     if request.session.get('score'):
         del request.session['score']
     if request.session.get('ls'):
@@ -18,11 +18,12 @@ def home(request, user = False):
     if request.session.get('time'):
         del request.session['time'] 
               
-    #Recojo de la API de opentdb todas las categorias de preguntas que tienen
+    #Recojo de la API de opentdb todas las categorias de preguntas que tienen.
     context = ssl._create_unverified_context()
     res = urlopen('https://opentdb.com/api_category.php', context=context) 
     data = json.loads(res.read()) 
     
+    # Si vengo del login traere el user.
     if user:
         return render(request, 'home.html', {'categorias': data['trivia_categories'], 'user': user})
     return render(request, 'home.html', {'categorias': data['trivia_categories']})
@@ -58,7 +59,6 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return home(request, user)
-                #return render(request, 'home.html', {'user': user})
     else:
         form = login_form()
     return render(request, 'login.html', {'form': form})
@@ -77,7 +77,7 @@ def preguntas(request, numero = 0):
         t = int(time.time())
         request.session['time'] = t 
 
-    # Si es la primera vez que entro en el trivial cojo las preguntas de la categoria elegida
+    # Si es la primera vez que entro en el trivial cojo las preguntas de la categoria elegida.
     ls = request.session.get('ls')
     if ls is None or ls == []:
         ls = get_preguntas_categoria(request.POST.get('categoria', False))
@@ -85,7 +85,7 @@ def preguntas(request, numero = 0):
 
     if request.method == 'POST' and numero > 0:
         if numero > 9:
-    # Si el usuario no esta registrado no se guardara en ningun sitio pero igualmente se mostrara.
+    # Si el usuario no esta registrado no se guardara informacion en ningun sitio pero igualmente se mostrara.
     # Si esta registrado se guardara la primera vez y la siguiente la comparara a la ya guardada, tambien se mostrara.
             if str(request.user) != 'AnonymousUser':
                 sco = Score.objects.filter(user = request.user).first()
@@ -122,7 +122,7 @@ def get_preguntas_bd(res, ls, score, numero):
         mensaje = 'We could not load the selected category'
         if res == pregs.resp_correcta:
             score += 1
-        
+    # En cualquier caso cambio de lugar las respuestas para que nuncan esten en el mismo sitio  
     random.shuffle(resp)
 
     return preg, resp, score, mensaje
