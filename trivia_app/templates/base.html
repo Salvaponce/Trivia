@@ -5,33 +5,32 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="{% static '\css\gestion.css'%}" rel="stylesheet">
+    <link href="{% static '\css\gestion.css'%}" rel="stylesheet" />
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
-      {%load bootstrap5%} {% bootstrap_css %} {% bootstrap_javascript %}
-      <ul class="nav nav-pills nav-fill" style="margin-bottom: 2rem">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/trivial/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/trivial/ranking/">Ranking</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"></a>
-        </li>
-        {% if user.is_authenticated %}
-        <p style="margin-right: 10px"
-          >Bienvenido {{user}} <a href="/trivial/logout/">Salir</a></p
-        >
-        {% else %}
-        <p style="margin-right: 10px"
-          ><a href="/trivial/signup/">Sign up</a> |
-          <a href="/trivial/login/">Login</a> |</p
-        >
-        {% endif %}
-      </ul>
-      {% block content %} {% endblock %}
-    </td></body
-  >
+    {%load bootstrap5%} {% bootstrap_css %} {% bootstrap_javascript %}
+    <ul class="nav nav-pills nav-fill" style="margin-bottom: 2rem">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/trivial/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/trivial/ranking/">Ranking</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"></a>
+      </li>
+      {% if user.is_authenticated %}
+      <p style="margin-right: 10px"
+        >Bienvenido {{user}} <a href="/trivial/logout/">Salir</a></p
+      >
+      {% else %}
+      <p style="margin-right: 10px"
+        >| <a href="/trivial/signup/">Sign up</a> |
+        <a href="/trivial/login/">Login</a> |</p
+      >
+      {% endif %}
+    </ul>
+    {% block content %} {% endblock %}
+  </body>
 </html>
