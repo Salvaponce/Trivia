@@ -1,0 +1,1 @@
+web: gunicorn Trivia.wsgy --log-file -

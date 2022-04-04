@@ -26,7 +26,7 @@ SECRET_KEY = 'ty1zed46hq@@yu2t*!a&6(u9nvx1ktv+!gj$r&%w%&5o9*)ukd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sptrivia-app.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
