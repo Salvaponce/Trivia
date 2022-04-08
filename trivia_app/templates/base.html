@@ -21,10 +21,11 @@
         <a class="nav-link" href="#"></a>
       </li>
       {% if user.is_authenticated %}
-      <p style="margin-right: 10px">Bienvenido {{user}} <a href="logout/">Salir</a></p>
+      <p style="margin-right: 10px">Bienvenido {{user}} <a href="logout/">Log out</a></p>
       {% else %}
       <p style="margin-right: 10px"
-        >| <a href="signup/">Sign up</a> | <a href="login/">Login</a> |</p
+        ><a class="btn btn-primary" href="signup/" role="button">Sign up</a>
+        <a class="btn btn-primary" href="login/" role="button">Login</a></p
       >
       {% endif %}
     </ul>
