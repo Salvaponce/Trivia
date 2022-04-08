@@ -12,22 +12,19 @@
     {%load bootstrap5%} {% bootstrap_css %} {% bootstrap_javascript %}
     <ul class="nav nav-pills nav-fill" style="margin-bottom: 2rem">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/trivial/">Home</a>
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/trivial/ranking/">Ranking</a>
+        <a class="nav-link active" href="ranking/">Ranking</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"></a>
       </li>
       {% if user.is_authenticated %}
-      <p style="margin-right: 10px"
-        >Bienvenido {{user}} <a href="/trivial/logout/">Salir</a></p
-      >
+      <p style="margin-right: 10px">Bienvenido {{user}} <a href="logout/">Salir</a></p>
       {% else %}
       <p style="margin-right: 10px"
-        >| <a href="/trivial/signup/">Sign up</a> |
-        <a href="/trivial/login/">Login</a> |</p
+        >| <a href="signup/">Sign up</a> | <a href="login/">Login</a> |</p
       >
       {% endif %}
     </ul>
